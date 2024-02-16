@@ -16,6 +16,7 @@ add_definitions(-DUNIT_TEST)
 include_directories(${CMAKE_SOURCE_DIR}/linked_list)
 include_directories(${CMAKE_SOURCE_DIR}/list)
 include_directories(${CMAKE_SOURCE_DIR}/stack)
+include_directories(${CMAKE_SOURCE_DIR}/queue)
 
 # 设置可执行文件输出目录
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
