@@ -3,6 +3,7 @@
 #define LIST_H
 
 #include <cassert>
+#include <iostream>
 #include <stdexcept>
 
 /**
@@ -64,6 +65,13 @@ public:
     }
 
     unsigned int Size() const { return _size; }
+
+    void print() {
+        for (int i = 0; i < _size; ++i) {
+            std::cout << _data[i] << " ";
+        }
+        std::cout << std::endl;
+    }
 
 private:
     int         *_data;
