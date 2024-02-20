@@ -7,6 +7,7 @@
 /**
  * \brief: 链表实现的队列
  */
+template<typename T>
 class LinkedListQueue {
 public:
     LinkedListQueue()
@@ -21,7 +22,7 @@ public:
         }
     }
 
-    void Push(int value) {
+    void Push(T value) {
         Node *node = new Node(value);
         if (!node) throw std::runtime_error("new Node failed");
 
@@ -35,8 +36,8 @@ public:
         _size++;
     }
 
-    int Pop() {
-        int val = Peek();
+    T Pop() {
+        T val = Peek();
 
         Node *p = _head;
 
@@ -50,7 +51,7 @@ public:
         return val;
     }
 
-    int Peek() const {
+    T Peek() const {
         if (_size <= 0) throw std::runtime_error("Queue is empty");
         return _head->value;
     }
@@ -60,9 +61,9 @@ public:
 
 private:
     struct Node {
-        int   value;
+        T     value;
         Node *next;
-        Node(int value)
+        Node(T value)
             : value(value)
             , next(nullptr) {}
         ~Node() {}

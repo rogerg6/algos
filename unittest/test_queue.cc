@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
 }
 
 TEST(linked_list_queue, function_test) {
-    LinkedListQueue q;
+    LinkedListQueue<int> q;
     EXPECT_TRUE(q.Empty());
 
     q.Push(1);
