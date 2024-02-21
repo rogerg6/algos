@@ -16,6 +16,18 @@ struct BSNode {
         , right(nullptr) {}
 };
 
+/**
+ * \brief: 二叉搜索树的链表实现.
+ *
+ * 定义:
+ * 1. 对于根节点，左子树中所有节点的值 < 根节点的值 < 右子树中所有节点的值。
+ * 2. 任意节点的左、右子树也是二叉搜索树，即同样满足条件1
+ *
+ * 支持泛型.
+ * add,remove,find: 时间复杂度=O(log n)
+ *
+ * 但是在高频的add/remove操作下,可能会退化为链表(O(n))
+ **/
 template<typename T>
 class BinarySearchTree {
 public:

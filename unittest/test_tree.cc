@@ -9,6 +9,19 @@ int main(int argc, char *argv[]) {
     return RUN_ALL_TESTS();
 }
 
+/**
+ * 测试各种二叉树的遍历顺序是否正确
+ * TREE遍历接口必须一致, T是TREE中保存的值的类型
+ */
+template<typename TREE, typename T>
+void test_traverse(const TREE &t, const std::vector<T> level_order, const std::vector<T> pre_order,
+                   const std::vector<T> in_order, const std::vector<T> post_order) {
+    EXPECT_EQ(t.LevelOrderTraverse(), level_order);
+    EXPECT_EQ(t.PreOrderTraverse(), pre_order);
+    EXPECT_EQ(t.InOrderTraverse(), in_order);
+    EXPECT_EQ(t.PostOrderTraverse(), post_order);
+}
+
 TEST(binary_tree, traverse) {
     BinaryTree t;
     Node      *n1 = new Node(1);
@@ -90,18 +103,6 @@ TEST(array_binary_tree, traverse) {
     EXPECT_EQ(t.order, post_order);
 }
 
-/**
- * 测试各种二叉树的遍历顺序是否正确
- * TREE遍历接口必须一致, T是TREE中保存的值的类型
- */
-template<typename TREE, typename T>
-void test_traverse(const TREE &t, const std::vector<T> level_order, const std::vector<T> pre_order,
-                   const std::vector<T> in_order, const std::vector<T> post_order) {
-    EXPECT_EQ(t.LevelOrderTraverse(), level_order);
-    EXPECT_EQ(t.PreOrderTraverse(), pre_order);
-    EXPECT_EQ(t.InOrderTraverse(), in_order);
-    EXPECT_EQ(t.PostOrderTraverse(), post_order);
-}
 
 TEST(binary_search_tree, function_test) {
     BinarySearchTree<int> t;
