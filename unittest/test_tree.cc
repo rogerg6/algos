@@ -1,5 +1,6 @@
 
 #include "array_binary_tree.h"
+#include "avl_tree.h"
 #include "binary_search_tree.h"
 #include "binary_tree.h"
 #include "gtest/gtest.h"
@@ -146,4 +147,43 @@ TEST(binary_search_tree, function_test) {
                                               {4, 3, 2, 1, 8, 9, 10},
                                               {1, 2, 3, 4, 8, 9, 10},
                                               {1, 2, 3, 10, 9, 8, 4});
+}
+
+/**
+ * call: height(-1, node);
+ */
+template<typename T>
+int height(int depth, AVLNode<T> *node) {
+    if (!node) return depth;
+    int ldp = height(depth + 1, node->left);
+    int rdp = height(depth + 1, node->right);
+    return std::max(ldp, rdp);
+}
+
+template<typename T>
+void check_avltree(AVLNode<T> *root) {
+    if (!root) return;
+    EXPECT_TRUE(std::abs(height(-1, root->left) - height(-1, root->right)) <= 1);
+    if (root->left) EXPECT_TRUE(root->left->val < root->val);
+    if (root->right) EXPECT_TRUE(root->val < root->right->val);
+    if (root->left) check_avltree(root->left);
+    if (root->left) check_avltree(root->right);
+}
+
+TEST(AVL_Tree, funciton_test) {
+    AVLTree<int> t;
+
+    EXPECT_EQ(t.Size(), 0);
+    for (int i = 1; i <= 20; i++) {
+        t.Insert(i);
+        EXPECT_EQ(t.Size(), i);
+        check_avltree(t._root);
+    }
+    EXPECT_EQ(t.Size(), 20);
+
+    for (int i = 20; i >= 1; i--) {
+        t.Remove(i);
+        EXPECT_EQ(t.Size(), i - 1);
+        check_avltree(t._root);
+    }
 }
