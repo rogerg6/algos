@@ -11,6 +11,27 @@ int main(int argc, char *argv[]) {
 }
 
 /**
+ * call: height(-1, node);
+ */
+template<typename T>
+int height(T *node) {
+    if (!node) return -1;
+    int ldp = height(node->left);
+    int rdp = height(node->right);
+    return std::max(ldp, rdp) + 1;
+}
+
+template<typename T>
+void check_avltree(AVLNode<T> *root) {
+    if (!root) return;
+    EXPECT_TRUE(std::abs(height(root->left) - height(root->right)) <= 1);
+    if (root->left) EXPECT_TRUE(root->left->val < root->val);
+    if (root->right) EXPECT_TRUE(root->val < root->right->val);
+    if (root->left) check_avltree(root->left);
+    if (root->left) check_avltree(root->right);
+}
+
+/**
  * 测试各种二叉树的遍历顺序是否正确
  * TREE遍历接口必须一致, T是TREE中保存的值的类型
  */
@@ -44,6 +65,15 @@ TEST(binary_tree, traverse) {
     std::vector<int> pre_order   = {1, 2, 4, 5, 3, 6, 7};
     std::vector<int> in_order    = {4, 2, 5, 1, 6, 3, 7};
     std::vector<int> post_order  = {4, 5, 2, 6, 7, 3, 1};
+
+    // test height
+    EXPECT_EQ(height(n1), 2);
+    EXPECT_EQ(height(n2), 1);
+    EXPECT_EQ(height(n3), 1);
+    EXPECT_EQ(height(n4), 0);
+    EXPECT_EQ(height(n5), 0);
+    EXPECT_EQ(height(n6), 0);
+    EXPECT_EQ(height(n7), 0);
 
     t.order.clear();
     t.LevelOrderTraverse();
@@ -147,27 +177,6 @@ TEST(binary_search_tree, function_test) {
                                               {4, 3, 2, 1, 8, 9, 10},
                                               {1, 2, 3, 4, 8, 9, 10},
                                               {1, 2, 3, 10, 9, 8, 4});
-}
-
-/**
- * call: height(-1, node);
- */
-template<typename T>
-int height(int depth, AVLNode<T> *node) {
-    if (!node) return depth;
-    int ldp = height(depth + 1, node->left);
-    int rdp = height(depth + 1, node->right);
-    return std::max(ldp, rdp);
-}
-
-template<typename T>
-void check_avltree(AVLNode<T> *root) {
-    if (!root) return;
-    EXPECT_TRUE(std::abs(height(-1, root->left) - height(-1, root->right)) <= 1);
-    if (root->left) EXPECT_TRUE(root->left->val < root->val);
-    if (root->right) EXPECT_TRUE(root->val < root->right->val);
-    if (root->left) check_avltree(root->left);
-    if (root->left) check_avltree(root->right);
 }
 
 TEST(AVL_Tree, funciton_test) {
