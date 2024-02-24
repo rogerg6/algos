@@ -9,10 +9,11 @@
 /**
  * 类似std::vector
  */
+template<typename T>
 class List {
 public:
     List()
-        : _data(new int[1])
+        : _data(new T[1])
         , _size(0)
         , _capcity(1) {}
 
@@ -23,14 +24,14 @@ public:
         _capcity = 0;
     }
 
-    void Append(int val) {
+    void Append(T val) {
         if (_size >= _capcity) {
             Resize(_capcity * 2);
         }
         _data[_size++] = val;
     }
 
-    void Insert(int index, int val) {
+    void Insert(int index, T val) {
         if (index < 0 || index >= _size) throw std::out_of_range("out of boundary");
 
         if (_size >= _capcity) {
@@ -73,8 +74,13 @@ public:
         std::cout << std::endl;
     }
 
+#ifdef UNIT_TEST
+public:
+#else
 private:
-    int         *_data;
+#endif
+
+    T           *_data;
     unsigned int _size;
     unsigned int _capcity;
 };

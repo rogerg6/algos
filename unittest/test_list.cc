@@ -7,16 +7,17 @@ int main(int argc, char *argv[]) {
 }
 
 TEST(list_test, list) {
-    List l;
+    List<int> l;
     EXPECT_EQ(l.Size(), 0);
 
     l.Append(1);
     l.Append(2);
     l.Append(3);
     EXPECT_EQ(l.Size(), 3);
-    l.print();
+    for (int i = 0; i < l.Size(); i++) EXPECT_EQ(l._data[i], i + 1);
 
-    l.Remove(1);
+
+    l.Remove(0);
     EXPECT_EQ(l.Size(), 2);
-    l.print();
+    for (int i = 0; i < l.Size(); i++) EXPECT_EQ(l._data[i], i + 2);
 }

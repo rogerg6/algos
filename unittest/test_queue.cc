@@ -31,7 +31,7 @@ TEST(linked_list_queue, function_test) {
 }
 
 TEST(array_queue, function_test) {
-    ArrayQueue q(5);
+    ArrayQueue<int> q(5);
     EXPECT_TRUE(q.Empty());
     // empty
     try {
@@ -77,7 +77,7 @@ TEST(array_queue, function_test) {
 }
 
 TEST(linked_list_deque, function_test) {
-    LinkedListDeque q;
+    LinkedListDeque<int> q;
     EXPECT_TRUE(q.Empty());
 
     // 循环测试n次
@@ -109,7 +109,7 @@ TEST(linked_list_deque, function_test) {
 }
 
 TEST(array_deque, function_test) {
-    ArrayDeque q(6);
+    ArrayDeque<int> q(6);
     EXPECT_TRUE(q.Empty());
     try {
         q.PopHead();

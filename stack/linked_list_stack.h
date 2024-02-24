@@ -8,6 +8,7 @@
 /**
  * \brief: 基于链表实现的栈
  */
+template<typename T>
 class LinkedListStack {
 public:
     LinkedListStack()
@@ -24,7 +25,7 @@ public:
         _head = nullptr;
     }
 
-    void Push(int val) {
+    void Push(T val) {
         Node *node = new Node(val);
         if (!node) throw std::runtime_error("alloc Node error");
 
@@ -33,8 +34,8 @@ public:
         _size++;
     }
 
-    int Pop() {
-        int   val = Peek();
+    T Pop() {
+        T     val = Peek();
         Node *tmp = _head;
         _head     = tmp->next;
         delete tmp;
@@ -42,7 +43,7 @@ public:
         return val;
     }
 
-    int Peek() const {
+    T Peek() const {
         if (_size <= 0) throw std::runtime_error("stack is empty");
         return _head->val;
     }
@@ -53,9 +54,9 @@ public:
 private:
     /* 链表节点类 */
     struct Node {
-        int          val;
+        T            val;
         struct Node *next;
-        Node(int v)
+        Node(T v)
             : val(v)
             , next(nullptr) {}
         ~Node() {}

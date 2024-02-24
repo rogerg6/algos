@@ -9,23 +9,24 @@
 /**
  * \brief: 基于列表实现的栈
  */
+template<typename T>
 class ListStack {
 public:
     ListStack() {}
     ~ListStack() {}
 
-    void Push(int val) { _data.push_back(val); }
+    void Push(T val) { _data.push_back(val); }
 
-    int Pop() {
+    T Pop() {
         if (_data.size() < 0) {
             throw std::runtime_error("stack is empty!");
         }
-        int tmp = _data.back();
+        T tmp = _data.back();
         _data.pop_back();
         return tmp;
     }
 
-    int Peek() const {
+    T Peek() const {
         if (_data.size() < 0) {
             throw std::runtime_error("stack is empty!");
         }
@@ -36,7 +37,7 @@ public:
     int  Size() const { return _data.size(); }
 
 private:
-    std::vector<int> _data;
+    std::vector<T> _data;
 };
 
 

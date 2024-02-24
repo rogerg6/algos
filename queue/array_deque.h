@@ -4,11 +4,15 @@
 
 #include <stdexcept>
 
+/**
+ * \brief: 双向队列, 头尾皆可push/pop
+ */
+template<typename T>
 class ArrayDeque {
 
 public:
     ArrayDeque(int cap) {
-        _data = new int[cap];
+        _data = new T[cap];
         if (!_data) throw std::runtime_error("New ArrayQueue failed");
 
         _head = _tail = _size = 0;
@@ -18,37 +22,37 @@ public:
         if (_data) delete[] _data;
     }
 
-    void PushHead(int val) {
+    void PushHead(T val) {
         if (_size >= _capcity) throw std::runtime_error("Queue is full");
         _head        = (_head - 1 + _capcity) % _capcity;
         _data[_head] = val;
         _size++;
     }
-    void PushTail(int val) {
+    void PushTail(T val) {
         if (_size >= _capcity) throw std::runtime_error("Queue is full");
         _data[_tail] = val;
         _tail        = (_tail + 1) % _capcity;
         _size++;
     }
 
-    int PopHead() {
-        int val = PeekHead();
-        _head   = (_head + 1) % _capcity;
+    T PopHead() {
+        T val = PeekHead();
+        _head = (_head + 1) % _capcity;
         _size--;
         return val;
     }
-    int PopTail() {
-        int val = PeekTail();
-        _tail   = (_tail - 1 + _capcity) % _capcity;
+    T PopTail() {
+        T val = PeekTail();
+        _tail = (_tail - 1 + _capcity) % _capcity;
         _size--;
         return val;
     }
 
-    int PeekHead() const {
+    T PeekHead() const {
         if (_size <= 0) throw std::runtime_error("Queue is empty");
         return _data[_head];
     }
-    int PeekTail() const {
+    T PeekTail() const {
         if (_size <= 0) throw std::runtime_error("Queue is empty");
         int tail = (_tail - 1 + _capcity) % _capcity;
         return _data[tail];
@@ -58,10 +62,10 @@ public:
     int  Size() const { return _size; }
 
 private:
-    int *_data;
-    int  _size;
-    int  _capcity;
-    int  _head, _tail;
+    T  *_data;
+    int _size;
+    int _capcity;
+    int _head, _tail;
 };
 
 

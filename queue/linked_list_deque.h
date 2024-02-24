@@ -8,6 +8,7 @@
 /**
  * \brief: 双向链表实现的双向队列. 2端都可以入对出对
  */
+template<typename T>
 class LinkedListDeque {
 public:
     LinkedListDeque()
@@ -24,19 +25,19 @@ public:
         _head = _tail = nullptr;
     }
 
-    void PushHead(int val) { Push(val, true); }
-    void PushTail(int val) { Push(val, false); }
-    int  PopHead() { return Pop(true); }
-    int  PopTail() { return Pop(false); }
+    void PushHead(T val) { Push(val, true); }
+    void PushTail(T val) { Push(val, false); }
+    T    PopHead() { return Pop(true); }
+    T    PopTail() { return Pop(false); }
 
-    int PeekHead() const { return Peek(true); }
-    int PeekTail() const { return Peek(false); }
+    T PeekHead() const { return Peek(true); }
+    T PeekTail() const { return Peek(false); }
 
     bool Empty() const { return _size <= 0; }
     int  Size() const { return _size; }
 
 private:
-    inline void Push(int val, bool is_head) {
+    inline void Push(T val, bool is_head) {
         Node *p = new Node(val);
         if (!p) throw std::runtime_error("New Node failed");
 
@@ -54,8 +55,8 @@ private:
         _size++;
     }
 
-    inline int Pop(bool is_head) {
-        int val = Peek(is_head);
+    inline T Pop(bool is_head) {
+        T val = Peek(is_head);
 
         Node *p;
         if (is_head) {
@@ -74,7 +75,7 @@ private:
         return val;
     }
 
-    inline int Peek(bool is_head) const {
+    inline T Peek(bool is_head) const {
         if (_size <= 0) throw std::runtime_error("Deque is empty");
         if (is_head)
             return _head->val;
@@ -84,10 +85,10 @@ private:
 
 private:
     struct Node {
-        int          val;
+        T            val;
         struct Node *prev;
         struct Node *next;
-        Node(int v)
+        Node(T v)
             : val(v)
             , prev(nullptr)
             , next(nullptr) {}

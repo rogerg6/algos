@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
 }
 
 TEST(linked_list_stack, function_test) {
-    LinkedListStack l;
+    LinkedListStack<int> l;
     EXPECT_TRUE(l.Empty());
 
     l.Push(1);
@@ -29,7 +29,7 @@ TEST(linked_list_stack, function_test) {
 }
 
 TEST(list_stack, function_test) {
-    ListStack l;
+    ListStack<int> l;
     EXPECT_TRUE(l.Empty());
 
     l.Push(1);
