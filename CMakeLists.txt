@@ -21,6 +21,7 @@ include_directories(${CMAKE_SOURCE_DIR}/hash)
 include_directories(${CMAKE_SOURCE_DIR}/tree)
 include_directories(${CMAKE_SOURCE_DIR}/heap)
 include_directories(${CMAKE_SOURCE_DIR}/graph)
+include_directories(${CMAKE_SOURCE_DIR}/search)
 
 # 设置可执行文件输出目录
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
