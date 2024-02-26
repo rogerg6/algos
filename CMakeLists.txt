@@ -13,6 +13,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 add_definitions(-DUNIT_TEST)
 
 # head files
+include_directories(${CMAKE_SOURCE_DIR}/unittest/timer)
 include_directories(${CMAKE_SOURCE_DIR}/linked_list)
 include_directories(${CMAKE_SOURCE_DIR}/list)
 include_directories(${CMAKE_SOURCE_DIR}/stack)
@@ -44,7 +45,7 @@ foreach(SOURCE ${SOURCES})
     get_filename_component(EXEC_NAME ${SOURCE} NAME_WE)
     
     # 添加可执行文件，并指定源文件
-    add_executable(${EXEC_NAME} ${SOURCE})
+    add_executable(${EXEC_NAME} ${SOURCE} unittest/timer/timer.cc)
     target_link_libraries(${EXEC_NAME} gtest gtest_main )
     
     # 安装可执行文件到指定目录
