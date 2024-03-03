@@ -75,21 +75,10 @@ TEST(binary_tree, traverse) {
     EXPECT_EQ(height(n6), 0);
     EXPECT_EQ(height(n7), 0);
 
-    t.order.clear();
-    t.LevelOrderTraverse();
-    EXPECT_EQ(t.order, level_order);
-
-    t.order.clear();
-    t.PreOrderTraverse();
-    EXPECT_EQ(t.order, pre_order);
-
-    t.order.clear();
-    t.InOrderTraverse();
-    EXPECT_EQ(t.order, in_order);
-
-    t.order.clear();
-    t.PostOrderTraverse();
-    EXPECT_EQ(t.order, post_order);
+    EXPECT_EQ(t.LevelOrderTraverse(), level_order);
+    EXPECT_EQ(t.PreOrderTraverse(), pre_order);
+    EXPECT_EQ(t.InOrderTraverse(), in_order);
+    EXPECT_EQ(t.PostOrderTraverse(), post_order);
 
     delete n1;
     delete n2;
