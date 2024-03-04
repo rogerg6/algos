@@ -79,5 +79,116 @@ std::vector<std::vector<int>> PermutationII(const std::vector<int> &input) {
     return res;
 }
 
+static void dfs(const std::vector<int> &a, int target, int total, int start,
+                std::vector<int> &state, std::vector<std::vector<int>> &res) {
+    if (total == target) {
+        res.push_back(state);
+        return;
+    }
+
+    for (int i = start; i < a.size(); i++) {
+        if (total + a[i] > target) continue;
+        state.push_back(a[i]);
+        dfs(a, target, total + a[i], i, state, res);
+        state.pop_back();
+    }
+}
+
+/**
+ * \brief: 子集和问题
+ *
+ * 例如，输入集合 {3,4, 5} 和目标整数 9 ，解为 {3,3, 3}, {4,5} 。
+ * 输入集合是不重复的, 元素可以无限次被选取; {4,5}{5,4}是一样的
+ */
+std::vector<std::vector<int>> SubsetSum(const std::vector<int> &input, int target) {
+    std::vector<std::vector<int>> res;
+    int                           total = 0;
+    int                           start = 0;
+    std::vector<int>              state;
+    dfs(input, target, total, start, state, res);
+    return res;
+}
+
+static void dfs_duplicate(const std::vector<int> &a, int target, int total, int start,
+                          std::vector<int> &state, std::vector<std::vector<int>> &res) {
+    if (total == target) {
+        res.push_back(state);
+        return;
+    }
+
+    for (int i = start; i < a.size(); i++) {
+        if (total + a[i] > target) continue;
+        if (i > start && a[i] == a[i - 1]) continue;
+
+        state.push_back(a[i]);
+        dfs(a, target, total + a[i], i + 1, state, res);
+        state.pop_back();
+    }
+}
+
+/**
+ * \brief: 子集和问题
+ *
+ * 例如，输入集合 {4,4, 5} 和目标整数 9 ，解为  {4,5} 。
+ * 输入集合是重复的; 每个元素只可以被选取一次; {4,5}{5,4}是一样的
+ */
+std::vector<std::vector<int>> SubsetSum_duplicate(const std::vector<int> &input, int target) {
+    std::vector<std::vector<int>> res;
+    int                           total = 0;
+    int                           start = 0;
+    std::vector<int>              state;
+    dfs_duplicate(input, target, total, start, state, res);
+    return res;
+}
+
+typedef std::vector<std::vector<int>> Mat;
+
+static void printMat(Mat &mat) {
+    for (auto &row : mat) {
+        for (auto &cell : row)
+            if (cell == 1)
+                std::cout << "x ";
+            else
+                std::cout << ". ";
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+}
+
+
+static void dfs_eightqueens(Mat &mat, int row, int n, int &res_num, std::vector<bool> &cols,
+                            std::vector<bool> &diags1, std::vector<bool> &diags2) {
+    if (row == n) {
+        // res.push_back(mat);
+        printMat(mat);
+        res_num++;
+        return;
+    }
+    for (int col = 0; col < n; col++) {
+        int diag1 = row - col + n - 1;
+        int diag2 = row + col;
+        if (!cols[col] && !diags1[diag1] && !diags2[diag2]) {
+            mat[row][col] = 1;
+            cols[col] = diags1[diag1] = diags2[diag2] = true;
+            dfs_eightqueens(mat, row + 1, n, res_num, cols, diags1, diags2);
+            cols[col] = diags1[diag1] = diags2[diag2] = false;
+            mat[row][col]                             = 0;
+        }
+    }
+}
+/**
+ * \brief: 八皇后
+ * \param N: 棋盘边长的格子数
+ */
+void EightQueens(int N) {
+    Mat               mat(N, std::vector<int>(N, 0));   //棋盘状态图
+    std::vector<bool> cols(N, false);                   // 记录列有无皇后
+    std::vector<bool> diags1(2 * N - 1, false);         // 记录主对角线有无皇后
+    std::vector<bool> diags2(2 * N - 1, false);         // 记录副对角线有无皇后
+    int               res_num = 0;                      // 解的个数
+    dfs_eightqueens(mat, 0, N, res_num, cols, diags1, diags2);
+    std::cout << "res number: " << res_num << std::endl;
+}
+
 
 #endif

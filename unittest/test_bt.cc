@@ -32,3 +32,28 @@ TEST(permutationII, permutationI_has_repeated_elemen_Test) {
         std::cout << std::endl;
     }
 }
+
+TEST(subset_sum, subset_sum_test) {
+    std::vector<int> input  = {3, 4, 5};
+    int              target = 9;
+    auto             res    = SubsetSum(input, target);
+
+    for (auto &r : res) {
+        for (auto i : r) std::cout << i << " ";
+        std::cout << std::endl;
+    }
+}
+
+TEST(subset_sum_dup, subset_sum_dup_test) {
+    std::vector<int> input  = {4, 4, 5};
+    int              target = 9;
+    auto             res    = SubsetSum_duplicate(input, target);
+
+    for (auto &r : res) {
+        for (auto i : r) std::cout << i << " ";
+    }
+}
+
+TEST(eight_queens, test) {
+    EightQueens(8);
+}
