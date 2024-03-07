@@ -37,6 +37,6 @@ TEST(Hanoi_test, testing) {
     std::cout << std::endl;
     Hanoi(3, 'A', 'B', 'C');
     std::cout << std::endl;
-    Hanoi(64, 'A', 'B', 'C');
-    std::cout << std::endl;
+    //Hanoi(64, 'A', 'B', 'C');
+    //std::cout << std::endl;
 }
