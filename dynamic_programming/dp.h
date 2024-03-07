@@ -180,7 +180,12 @@ int CoinChange(std::vector<int> &coins, int change) {
  * 定义: dp[i,j]为把长度为i的str转换为长度为j的字符串的最小编辑步骤数
  * 每一个字符有3种选择, 则
  *
- * dp[i,j] = min(dp[i,j-1], dp[i-1,j-1], dp[i-1,j]) + 1
+ * 对字符串s和t, s.len=m, t.len=n, 解为dp[m,n]
+ * 则子问题为对于s的前i个字符, t的前j个字符, 解为d[i][j]
+ * 如果s的第i-1个字符和t的第j-1个字符相同则
+ *  dp[i,j] = dp[i-1,j-1]
+ * 否则需要编辑,则
+ *  dp[i,j] = min(dp[i,j-1], dp[i-1,j-1], dp[i-1,j]) + 1
  */
 int MinEditDis(std::string from, std::string to) {
     int m = from.size();
