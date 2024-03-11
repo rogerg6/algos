@@ -28,6 +28,7 @@ include_directories(${CMAKE_SOURCE_DIR}/divide_conquer)
 include_directories(${CMAKE_SOURCE_DIR}/backtracking)
 include_directories(${CMAKE_SOURCE_DIR}/dynamic_programming)
 include_directories(${CMAKE_SOURCE_DIR}/greedy)
+include_directories(${CMAKE_SOURCE_DIR}/threadSafe)
 
 # 设置可执行文件输出目录
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -50,7 +51,7 @@ foreach(SOURCE ${SOURCES})
     
     # 添加可执行文件，并指定源文件
     add_executable(${EXEC_NAME} ${SOURCE} unittest/timer/timer.cc)
-    target_link_libraries(${EXEC_NAME} gtest gtest_main )
+    target_link_libraries(${EXEC_NAME} gtest gtest_main pthread)
     
     # 安装可执行文件到指定目录
     install(TARGETS ${EXEC_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
